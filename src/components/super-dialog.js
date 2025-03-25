@@ -45,19 +45,28 @@ export default class SuperDialog extends HTMLElement{
         const okBtn = document.createElement('button');
         okBtn.appendChild(document.createTextNode('ok'));
         okBtn.addEventListener('click', () => this.dispatchStudent());
-        this.dialog.appendChild(cancelBtn)
+        this.dialog.appendChild(okBtn)
 
         this.shadow.appendChild(this.dialog);
     }
 
     dispatchStudent(){
+        const form = this.shadow.getElementById('form');
+        const data = new FormData(form);
+        const student = {
+            name: data.get('name'),
+            yob: parseInt(data.get('yob'))
+        }
 
         if (this.isEdit) {
-            
+            const event = new CustomEvent('student-edited', {detail: {index: this.index, student: student}})
+            this.dispatchEvent(event);
         } else {
-
-        
+            const event = new CustomEvent('student-added', {detail: student})
+            this.dispatchEvent(event);
         }
+
+        this.dialog.close();
     }
 
     setupForm(student){
@@ -71,8 +80,9 @@ export default class SuperDialog extends HTMLElement{
         }
     }
 
-    editStudent(student){
+    editStudent(student, index){
         this.isEdit = true;
+        this.index = index;
         this.setupForm(student)
         this.dialog.showModal()
     }

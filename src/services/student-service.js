@@ -24,5 +24,17 @@ export default class StudentService {
         return this.students;
     }
 
+    addStudent(student){
+        this.students.push(student);
+        this.saveStudents()
+        return this.students;
+    }
+
+    editStudent(student, index){
+        this.students[index] = student;
+        this.saveStudents()
+        return this.students;
+    }
+
 
 }

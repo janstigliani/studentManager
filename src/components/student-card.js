@@ -14,6 +14,10 @@ export default class StudentCard extends HTMLElement{
         return {name: 'giovanni', yob: 1981};
     }
 
+    get index(){
+        return this.getAttribute('selected-index');
+    }
+
     connectedCallback(){
         this.style();
         this.render()
@@ -49,7 +53,7 @@ export default class StudentCard extends HTMLElement{
         btn.appendChild(document.createTextNode('edit'));
         btn.addEventListener('click', () => {
             const sDialog = document.getElementById('student-dialog');
-            sDialog.editStudent(this.student)
+            sDialog.editStudent(this.student, this.index)
         })
         mainDiv.appendChild(btn);
         this.shadow.appendChild(mainDiv);

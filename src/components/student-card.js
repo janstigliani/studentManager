@@ -49,11 +49,13 @@ export default class StudentCard extends HTMLElement{
         btn.appendChild(document.createTextNode('edit'));
         btn.addEventListener('click', () => {
             const sDialog = document.getElementById('student-dialog');
-            sDialog.showModal()
+            sDialog.editStudent(this.student)
         })
         mainDiv.appendChild(btn);
         this.shadow.appendChild(mainDiv);
     }
+
+
 
 
 

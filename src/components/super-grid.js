@@ -37,7 +37,7 @@ export default class SuperGrid extends HTMLElement {
         btn.appendChild(document.createTextNode('add'));
         btn.addEventListener('click', () => {
             const sDialog = document.getElementById('student-dialog');
-            sDialog.showModal()
+            sDialog.addStudent()
         })
 
         controlsDiv.appendChild(btn);
